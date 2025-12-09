@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微分積分 解答</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            }
+        };
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', serif;
+            line-height: 2;
+            color: #000;
+            background: #fafafa;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px 60px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #000;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        h2 {
+            color: #000;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .problem {
+            background: #fff;
+            padding: 20px;
+            margin: 30px 0;
+            border: 1px solid #000;
+        }
+
+        .problem-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .step {
+            background: #fff;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 3px solid #000;
+            padding-left: 25px;
+        }
+
+        .step-title {
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+
+        .formula {
+            background: #fff;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+
+        .explanation {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 2px solid #666;
+            padding-left: 20px;
+        }
+
+        .answer-box {
+            background: #fff;
+            padding: 25px;
+            margin: 30px 0;
+            border: 2px solid #000;
+        }
+
+        .answer-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .verification {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #666;
+        }
+
+        .verification-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .calculation {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 2px solid #ccc;
+            padding-left: 15px;
+        }
+
+        .note {
+            background: #fff;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px dashed #666;
+            font-size: 0.95em;
+        }
+
+        p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+
+        .solution-number {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>微分積分 問5解答</h1>
+
+        <h2>【解答】</h2>
+
+        <div class="problem">
+            <div class="problem-title">【問題】方向微分の定義を書け</div>
+            <p>関数 $f(x,y)$ の点 $(1,2)$ における $\left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)$ 方向への微分の定義を求めます。</p>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（1）方向微分の概念を理解します。</div>
+            
+            <p>方向微分とは、多変数関数がある点から特定の方向に微小に動いたときの、関数値の変化率を表します。一変数関数の微分が接線の傾きを表すのと同様に、方向微分は指定された方向への関数の変化率を表します。</p>
+
+            <p>点 $(x_0, y_0)$ における単位ベクトル $\boldsymbol{v} = (v_1, v_2)$ 方向への方向微分は、次の極限で定義されます。</p>
+
+            <div class="formula">
+                $$\lim_{t \to 0} \frac{f(x_0 + t v_1, y_0 + t v_2) - f(x_0, y_0)}{t}$$
+            </div>
+
+            <p>この式の意味を説明します。$t$ は微小な実数で、点 $(x_0, y_0)$ から方向ベクトル $\boldsymbol{v}$ に沿って $t$ だけ移動した点は $(x_0 + t v_1, y_0 + t v_2)$ です。分子は、この移動による関数値の変化 $f(x_0 + t v_1, y_0 + t v_2) - f(x_0, y_0)$ を表し、分母の $t$ で割ることで変化率を求めます。$t \to 0$ の極限をとることで、瞬間的な変化率、すなわち方向微分が得られます。</p>
+
+            <div class="note">
+                方向ベクトルは通常単位ベクトル（長さが1のベクトル）として与えられます。単位ベクトルに正規化することで、方向微分の値が方向のみに依存するようになります。また、方向微分は偏微分の一般化と考えることができ、$x$ 軸方向への方向微分は $f_x$、$y$ 軸方向への方向微分は $f_y$ に対応します。
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（2）与えられた条件を確認します。</div>
+            
+            <p>問題では、点 $(1,2)$ における方向ベクトル $\left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)$ 方向への微分を求めます。</p>
+
+            <p>まず、方向ベクトルが単位ベクトルであることを確認します。ベクトルの長さを計算すると、</p>
+
+            <div class="calculation">
+                $$\sqrt{\left(\frac{1}{\sqrt{2}}\right)^2 + \left(-\frac{1}{\sqrt{2}}\right)^2} = \sqrt{\frac{1}{2} + \frac{1}{2}} = \sqrt{1} = 1$$
+            </div>
+
+            <p>したがって、このベクトルは単位ベクトルです。</p>
+
+            <p>与えられた条件を整理すると、点は $(x_0, y_0) = (1, 2)$ で、方向ベクトルは $(v_1, v_2) = \left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)$ です。</p>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（3）方向微分の定義式に代入します。</div>
+            
+            <p>一般的な方向微分の定義式に、与えられた値を代入します。</p>
+
+            <p>点 $(x_0, y_0) = (1, 2)$ から方向ベクトル $(v_1, v_2) = \left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)$ に沿って $t$ だけ移動した点は、</p>
+
+            <div class="calculation">
+                $$(x_0 + t v_1, y_0 + t v_2) = \left(1 + \frac{1}{\sqrt{2}}t, 2 - \frac{1}{\sqrt{2}}t\right)$$
+            </div>
+
+            <p>となります。$x$ 座標は $1 + \frac{1}{\sqrt{2}}t$、$y$ 座標は $2 - \frac{1}{\sqrt{2}}t$ です。</p>
+
+            <p>これを方向微分の定義式に代入すると、</p>
+
+            <div class="formula">
+                $$\lim_{t \to 0} \frac{f\left(1 + \frac{1}{\sqrt{2}}t, 2 - \frac{1}{\sqrt{2}}t\right) - f(1,2)}{t}$$
+            </div>
+
+            <p>この式が、点 $(1,2)$ における $\left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)$ 方向への微分の定義です。</p>
+
+            <div class="note">
+                この定義式は、$t$ が $0$ に近づくときの極限を表しています。$t > 0$ のときは正の方向、$t < 0$ のときは負の方向への変化率を考えますが、両方向の極限が一致するとき、方向微分が存在します。
+            </div>
+        </div>
+
+        <div class="answer-box">
+            <div class="answer-title">【最終結果】</div>
+            
+            <p>関数 $f(x,y)$ の点 $(1,2)$ における $\left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)$ 方向への微分の定義は、次の通りです。</p>
+
+            <div class="formula">
+                $$\lim_{t \to 0} \frac{f\left(1 + \frac{1}{\sqrt{2}}t, 2 - \frac{1}{\sqrt{2}}t\right) - f(1,2)}{t}$$
+            </div>
+
+            <p>この式は、点 $(1,2)$ から方向ベクトル $\left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)$ に沿って微小に移動したときの、関数値の変化率を表します。</p>
+        </div>
+
+        <div class="verification">
+            <div class="verification-title">検証</div>
+            
+            <p>まず、方向ベクトルが単位ベクトルであることを確認しました。$\left(\frac{1}{\sqrt{2}}\right)^2 + \left(-\frac{1}{\sqrt{2}}\right)^2 = \frac{1}{2} + \frac{1}{2} = 1$ となり、確かに単位ベクトルです。</p>
+
+            <p>次に、定義式の構造が正しいことを確認します。一般的な方向微分の定義式 $\lim_{t \to 0} \frac{f(x_0 + t v_1, y_0 + t v_2) - f(x_0, y_0)}{t}$ に、$(x_0, y_0) = (1, 2)$ と $(v_1, v_2) = \left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)$ を代入すると、確かに得られた式と一致します。また、$t \to 0$ の極限をとることで、瞬間的な変化率を表していることも確認できます。</p>
+
+            <p>以上より求めた結果の正しさを確認しました。</p>
+        </div>
+
+    </div>
+</body>
+</html>

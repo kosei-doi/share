@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微分積分 解答</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            }
+        };
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', serif;
+            line-height: 2;
+            color: #000;
+            background: #fafafa;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px 60px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #000;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        h2 {
+            color: #000;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .problem {
+            background: #fff;
+            padding: 20px;
+            margin: 30px 0;
+            border: 1px solid #000;
+        }
+
+        .problem-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .step {
+            background: #fff;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 3px solid #000;
+            padding-left: 25px;
+        }
+
+        .step-title {
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+
+        .formula {
+            background: #fff;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+
+        .explanation {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 2px solid #666;
+            padding-left: 20px;
+        }
+
+        .answer-box {
+            background: #fff;
+            padding: 25px;
+            margin: 30px 0;
+            border: 2px solid #000;
+        }
+
+        .answer-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .verification {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #666;
+        }
+
+        .verification-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .calculation {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 2px solid #ccc;
+            padding-left: 15px;
+        }
+
+        .note {
+            background: #fff;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px dashed #666;
+            font-size: 0.95em;
+        }
+
+        p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+
+        .solution-number {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>微分積分 問4解答</h1>
+
+        <h2>【解答】</h2>
+
+        <div class="problem">
+            <div class="problem-title">【問題】合成関数の微分がゼロとなる条件を求めよ</div>
+            <p>対象となる関数は $f(x,y) = e^{-(x^2+y^2)}$ で、$x = g(t)$、$y = h(t)$ とします。$g$ と $h$ は微分可能とし、$\frac{df}{dt} = 0$ となる条件を求めます。</p>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（1）合成関数の微分の公式を適用します。</div>
+            
+            <p>$f$ は $x$ と $y$ の関数で、$x$ と $y$ はそれぞれ $t$ の関数です。このとき $f$ を $t$ で微分するには合成関数の微分法（連鎖律）を使います。</p>
+
+            <p>合成関数の微分の公式は、$f(x(t), y(t))$ を $t$ で微分するとき、次のようになります。</p>
+
+            <div class="formula">
+                $$\frac{df}{dt} = \frac{\partial f}{\partial x} \frac{dx}{dt} + \frac{\partial f}{\partial y} \frac{dy}{dt}$$
+            </div>
+
+            <p>この公式は、$f$ の $t$ への依存が $x$ と $y$ を通じて間接的であることを表しています。$f$ の $t$ に関する変化率は、$x$ 経由の変化率と $y$ 経由の変化率の和で表されます。</p>
+
+            <div class="note">
+                合成関数の微分法は、多変数関数を一変数で微分する際の基本公式です。$f(x,y)$ が $x$ と $y$ の関数で、$x$ と $y$ が $t$ の関数であるとき、$f$ を $t$ で微分するには、各変数経路での変化率を足し合わせる必要があります。
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（2）偏導関数を計算します。</div>
+            
+            <p>合成関数の微分の公式を使うため、まず $\frac{\partial f}{\partial x}$ と $\frac{\partial f}{\partial y}$ を計算します。</p>
+
+            <p>$f(x,y) = e^{-(x^2+y^2)}$ を $x$ で偏微分するときは、$y$ を定数として扱います。指数関数の微分と合成関数の微分を組み合わせて計算します。</p>
+
+            <div class="formula">
+                $$\frac{\partial f}{\partial x} = \frac{\partial}{\partial x} \left[ e^{-(x^2+y^2)} \right]$$
+            </div>
+
+            <p>$e^u$ の導関数は $e^u \cdot u'$ です。ここで $u = -(x^2+y^2)$ とおくと、$u$ を $x$ で偏微分すると $-2x$ になります（$y$ は定数として扱うため）。したがって、</p>
+
+            <div class="calculation">
+                $$\frac{\partial f}{\partial x} = e^{-(x^2+y^2)} \cdot \frac{\partial}{\partial x} \left[ -(x^2+y^2) \right] = e^{-(x^2+y^2)} \cdot (-2x) = -2x e^{-(x^2+y^2)}$$
+            </div>
+
+            <p>同様に、$f(x,y) = e^{-(x^2+y^2)}$ を $y$ で偏微分するときは、$x$ を定数として扱います。</p>
+
+            <div class="formula">
+                $$\frac{\partial f}{\partial y} = \frac{\partial}{\partial y} \left[ e^{-(x^2+y^2)} \right]$$
+            </div>
+
+            <p>$u = -(x^2+y^2)$ を $y$ で偏微分すると $-2y$ になります（$x$ は定数として扱うため）。したがって、</p>
+
+            <div class="calculation">
+                $$\frac{\partial f}{\partial y} = e^{-(x^2+y^2)} \cdot \frac{\partial}{\partial y} \left[ -(x^2+y^2) \right] = e^{-(x^2+y^2)} \cdot (-2y) = -2y e^{-(x^2+y^2)}$$
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（3）$\frac{dx}{dt}$ と $\frac{dy}{dt}$ を表記します。</div>
+            
+            <p>$x = g(t)$、$y = h(t)$ より、$x$ と $y$ を $t$ で微分すると、それぞれ $g'(t)$ と $h'(t)$ になります。</p>
+
+            <div class="formula">
+                $$\frac{dx}{dt} = g'(t), \quad \frac{dy}{dt} = h'(t)$$
+            </div>
+
+            <p>これらは、$g$ と $h$ が微分可能であるという条件から存在します。</p>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（4）合成関数の微分の公式に代入して計算します。</div>
+            
+            <p>得られた偏導関数と導関数を合成関数の微分の公式に代入します。</p>
+
+            <div class="formula">
+                $$\frac{df}{dt} = \frac{\partial f}{\partial x} \frac{dx}{dt} + \frac{\partial f}{\partial y} \frac{dy}{dt}$$
+            </div>
+
+            <p>計算を進めます。</p>
+
+            <div class="calculation">
+                $$\frac{df}{dt} = \left[ -2x e^{-(x^2+y^2)} \right] \cdot g'(t) + \left[ -2y e^{-(x^2+y^2)} \right] \cdot h'(t)$$
+            </div>
+
+            <p>共通因数 $e^{-(x^2+y^2)}$ を括り出して整理します。</p>
+
+            <div class="calculation">
+                $$\frac{df}{dt} = -2x e^{-(x^2+y^2)} g'(t) - 2y e^{-(x^2+y^2)} h'(t) = -2e^{-(x^2+y^2)} \left[ x g'(t) + y h'(t) \right]$$
+            </div>
+
+            <p>さらに、$x = g(t)$、$y = h(t)$ であることを用いて、$x$ と $y$ を $g(t)$ と $h(t)$ で置き換えます。</p>
+
+            <div class="formula">
+                $$\frac{df}{dt} = -2e^{-(x^2+y^2)} \left[ g(t) g'(t) + h(t) h'(t) \right]$$
+            </div>
+
+            <p>この式は、$f$ の $t$ に関する変化率をまとめた形です。</p>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（5）$\frac{df}{dt} = 0$ となる条件を求めます。</div>
+            
+            <p>$\frac{df}{dt} = 0$ となる条件を求めます。先ほど得られた式から、</p>
+
+            <div class="formula">
+                $$\frac{df}{dt} = -2e^{-(x^2+y^2)} \left[ g(t) g'(t) + h(t) h'(t) \right] = 0$$
+            </div>
+
+            <p>この等式が成り立つためには、右辺の各因子を調べる必要があります。まず、$e^{-(x^2+y^2)}$ について考えます。指数関数は常に正の値をとるため、$e^{-(x^2+y^2)} > 0$ が成り立ちます。したがって、$e^{-(x^2+y^2)} \neq 0$ です。</p>
+
+            <p>また、係数 $-2$ は $0$ ではありません。したがって、$\frac{df}{dt} = 0$ となるためには括弧内が $0$ になる必要があります。</p>
+
+            <div class="formula">
+                $$g(t) g'(t) + h(t) h'(t) = 0$$
+            </div>
+
+            <p>これが $\frac{df}{dt} = 0$ となる条件です。</p>
+
+            <div class="note">
+                この条件は $g(t)$ と $h(t)$ が作る位置ベクトルと、その速度ベクトルが直交することを意味します。例えば $(g(t), h(t))$ が原点中心の円上を動くときに成立します。
+            </div>
+        </div>
+
+        <div class="answer-box">
+            <div class="answer-title">【最終結果】</div>
+            
+            <p>$\frac{df}{dt} = 0$ となる条件は、</p>
+
+            <div class="formula">
+                $$g(t) g'(t) + h(t) h'(t) = 0$$
+            </div>
+
+            <p>です。指数関数 $e^{-(x^2+y^2)}$ は常に正なので、$\frac{df}{dt}=0$ となるためにはこの括弧内が $0$ であることが必要十分です。</p>
+        </div>
+
+        <div class="verification">
+            <div class="verification-title">検証</div>
+            
+            <p>まず、合成関数の微分の公式が正しく適用されていることを確認します。$f(x,y) = e^{-(x^2+y^2)}$ の偏導関数は、指数関数の微分と合成関数の微分の組み合わせにより、$\frac{\partial f}{\partial x} = -2x e^{-(x^2+y^2)}$、$\frac{\partial f}{\partial y} = -2y e^{-(x^2+y^2)}$ となります。これらは正しく計算されています。</p>
+
+            <p>次に、得られた条件 $g(t) g'(t) + h(t) h'(t) = 0$ が実際に $\frac{df}{dt} = 0$ を満たすことを確認します。この条件を満たすとき、$\frac{df}{dt} = -2e^{-(x^2+y^2)} \cdot 0 = 0$ となり、確かに $\frac{df}{dt} = 0$ が成り立ちます。また、$e^{-(x^2+y^2)}$ は常に正の値であるため、$\frac{df}{dt} = 0$ となるためには括弧内が $0$ になる必要があり、この条件は必要十分です。</p>
+
+            <p>以上より求めた結果の正しさを確認しました。</p>
+        </div>
+
+    </div>
+</body>
+</html>
