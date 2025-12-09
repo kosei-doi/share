@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微分積分 解答</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            }
+        };
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', serif;
+            line-height: 2;
+            color: #000;
+            background: #fafafa;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px 60px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #000;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        h2 {
+            color: #000;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .problem {
+            background: #fff;
+            padding: 20px;
+            margin: 30px 0;
+            border: 1px solid #000;
+        }
+
+        .problem-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .step {
+            background: #fff;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 3px solid #000;
+            padding-left: 25px;
+        }
+
+        .step-title {
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+
+        .formula {
+            background: #fff;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+
+        .explanation {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 2px solid #666;
+            padding-left: 20px;
+        }
+
+        .answer-box {
+            background: #fff;
+            padding: 25px;
+            margin: 30px 0;
+            border: 2px solid #000;
+        }
+
+        .answer-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .verification {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #666;
+        }
+
+        .verification-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .calculation {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 2px solid #ccc;
+            padding-left: 15px;
+        }
+
+        .note {
+            background: #fff;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px dashed #666;
+            font-size: 0.95em;
+        }
+
+        p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+
+        .solution-number {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>微分積分 問3解答</h1>
+
+        <h2>【解答】</h2>
+
+        <div class="problem">
+            <div class="problem-title">【問題】条件付きで $f(x,y)=2xy$ の最大・最小を求めます。</div>
+            <p>制約は $x^2 + y^2 + 2x + 2y - 6 = 0$ です。この条件を満たす点上で $2xy$ の最大値と最小値を調べます。</p>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（1）制約を円の形に整理します。</div>
+            <p>二次式を平方完成して、中心と半径をはっきりさせます。</p>
+
+            <div class="formula">
+                $$(x+1)^2 + (y+1)^2 = 8$$
+            </div>
+
+            <p>制約集合は中心 $(-1,-1)$、半径 $2\sqrt{2}$ の円になります。以降の計算を簡単にするため、平行移動 $u = x+1,\ v = y+1$ を導入します。すると $x=u-1,\ y=v-1$、制約は $u^2+v^2=8$ となります。</p>
+
+            <div class="note">平方完成は二次の制約を扱う定番手順です。中心が原点に移るのでラグランジュ未定乗数法の計算が簡単になります。</div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（2）目的関数を $u,v$ で書き直し、ラグランジュ関数を作ります。</div>
+            <p>目的関数は $f(x,y)=2xy$ なので、置換を使って $f(u,v)=2(u-1)(v-1)=2uv-2u-2v+2$ と書き直します。制約 $u^2+v^2=8$ を組み込んでラグランジュ関数を作ります。</p>
+
+            <div class="formula">
+                $$\mathcal{L}(u,v,\lambda) = 2uv - 2u - 2v + 2 - \lambda(u^2 + v^2 - 8)$$
+            </div>
+
+            <p>極値は $\mathcal{L}$ の勾配がゼロになる点で起こるので、$u,v,\lambda$ で偏微分して連立します。</p>
+
+            <div class="formula">
+                $$\frac{\partial \mathcal{L}}{\partial u} = 2v - 2 - 2\lambda u = 0,\quad \frac{\partial \mathcal{L}}{\partial v} = 2u - 2 - 2\lambda v = 0,\quad u^2 + v^2 = 8$$
+            </div>
+
+            <p>整理すると $v-1=\lambda u$、$u-1=\lambda v$ の2本と円の方程式の3本を解く問題になります。</p>
+
+            <div class="note">ラグランジュ未定乗数法では「目的関数の勾配」と「制約の勾配」が平行になることを方程式で表します。この形にすることで、制約上の極値候補を漏れなく求められます。</div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（3）連立方程式を解いて候補点を出します。</div>
+            <p>対称性から $u=v$ になる場合をまず調べます。$u=v$ を $v-1=\lambda u$ に代入すると $(1-\lambda)u=1$ となり、$u=\dfrac{1}{1-\lambda}$ を得ます。さらに制約 $u^2+u^2=8$ から $u^2=4$ となり $u=\pm2$ が分かります。</p>
+
+            <div class="calculation">
+                $$u=v=2 \Rightarrow (x,y)=(1,1),\quad u=v=-2 \Rightarrow (x,y)=(-3,-3)$$
+            </div>
+
+            <p>次に、$u^2+v^2=8$ を満たしつつ $u$ と $v$ が等しくない場合を調べます。$\lambda=-1$ とすると $v-1=-u$、$u-1=-v$ が同時に成り立ち、これは $v=-u+1$ を意味します。これを制約に代入して解きます。</p>
+
+            <div class="calculation">
+                $$u^2 + (-u+1)^2 = 8 \;\Rightarrow\; 2u^2 - 2u - 7 = 0 \;\Rightarrow\; u = \frac{1 \pm \sqrt{15}}{2}$$
+                $$v = -u + 1 \Rightarrow \left(u,v\right)=\left(\frac{1+\sqrt{15}}{2},\ \frac{1-\sqrt{15}}{2}\right),\ \left(\frac{1-\sqrt{15}}{2},\ \frac{1+\sqrt{15}}{2}\right)$$
+                $$\Rightarrow (x,y) = \left(\frac{-1+\sqrt{15}}{2},\ \frac{-1-\sqrt{15}}{2}\right),\ \left(\frac{-1-\sqrt{15}}{2},\ \frac{-1+\sqrt{15}}{2}\right)$$
+            </div>
+
+            <p>$\lambda=1$ の場合は $(1-\lambda)u=1$ が矛盾するため解はありません。これで全ての候補点がそろいました。</p>
+
+            <div class="note">対称性があるときは $u=v$ をまず調べると計算が大幅に短縮できます。残りのケースは未定乗数の特定値（ここでは $\lambda=-1$）に着目すると、連立方程式が一次に簡約できて解きやすくなります。</div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（4）各候補で $f(x,y)$ を評価し、最大・最小を判定します。</div>
+            <p>元の関数 $f(x,y)=2xy$ に各候補点を代入して値を比較します。</p>
+
+            <div class="calculation">
+                $$f(1,1) = 2 \times 1 \times 1 = 2$$
+                $$f(-3,-3) = 2 \times (-3) \times (-3) = 18$$
+                $$f\!\left(\tfrac{-1+\sqrt{15}}{2}, \tfrac{-1-\sqrt{15}}{2}\right) = -7,\quad f\!\left(\tfrac{-1-\sqrt{15}}{2}, \tfrac{-1+\sqrt{15}}{2}\right) = -7$$
+            </div>
+
+            <p>最大値は $18$（点 $(-3,-3)$）、最小値は $-7$（上記2点のいずれか）になります。点 $(1,1)$ は中間の値 $2$ をとります。</p>
+
+            <div class="note">制約付き極値では「候補を漏れなく列挙し、値を比較する」のが確定的な判定法です。境界条件が円など閉集合の場合、ラグランジュ法で得た候補と（必要なら）境界パラメータ探索を突き合わせれば安心です。</div>
+        </div>
+
+        <div class="answer-box">
+            <div class="answer-title">【最終結果】</div>
+            <p>最大値 $18$ は点 $(-3,-3)$ で達成します。</p>
+            <p>最小値 $-7$ は点 $\\left(\\dfrac{-1+\\sqrt{15}}{2},\\ \\dfrac{-1-\\sqrt{15}}{2}\\right)$ と点 $\\left(\\dfrac{-1-\\sqrt{15}}{2},\\ \\dfrac{-1+\\sqrt{15}}{2}\\right)$ の2点で達成します。</p>
+            <p>点 $(1,1)$ では値 $2$ をとり、最大・最小にはなりません。</p>
+        </div>
+
+        <div class="verification">
+            <div class="verification-title">検証</div>
+            <p>すべての候補点が制約 $(x+1)^2 + (y+1)^2 = 8$ を満たすことを直接代入して確認します。また、各点でラグランジュの条件 $v-1=\lambda u,\ u-1=\lambda v$（元の変数では $y=\lambda(x+1),\ x=\lambda(y+1)$）が成り立つことを確かめ、勾配が平行であることを確認します。</p>
+            <p>最大・最小の判定は候補点での関数値を比較する方法で再確認します。$18$ より大きい値や $-7$ より小さい値を取る候補が存在しないことを確認し、以上より求めた結果の正しさを確認しました。</p>
+        </div>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微分積分 解答</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            }
+        };
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', serif;
+            line-height: 2;
+            color: #000;
+            background: #fafafa;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px 60px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #000;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        h2 {
+            color: #000;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .problem {
+            background: #fff;
+            padding: 20px;
+            margin: 30px 0;
+            border: 1px solid #000;
+        }
+
+        .problem-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .step {
+            background: #fff;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 3px solid #000;
+            padding-left: 25px;
+        }
+
+        .step-title {
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+
+        .formula {
+            background: #fff;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+
+        .explanation {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 2px solid #666;
+            padding-left: 20px;
+        }
+
+        .answer-box {
+            background: #fff;
+            padding: 25px;
+            margin: 30px 0;
+            border: 2px solid #000;
+        }
+
+        .answer-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .verification {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #666;
+        }
+
+        .verification-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .calculation {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 2px solid #ccc;
+            padding-left: 15px;
+        }
+
+        .note {
+            background: #fff;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px dashed #666;
+            font-size: 0.95em;
+        }
+
+        p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+
+        .solution-number {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>微分積分 問3解答</h1>
+
+        <h2>【解答】</h2>
+
+        <div class="problem">
+            <div class="problem-title">【問題】制約付きで $f(x,y)=2xy$ の最大・最小を求めよ</div>
+            <p>制約は $x^2 + y^2 + 2x + 2y - 6 = 0$ です。この条件を満たす点上で $2xy$ の最大値と最小値を求めます。</p>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（1）制約を円の形に直し、平行移動します。</div>
+            <p>平方完成で中心と半径をはっきりさせ、計算を簡単にします。</p>
+
+            <div class="formula">
+                $$(x+1)^2 + (y+1)^2 = 8$$
+            </div>
+
+            <p>制約集合は中心 $(-1,-1)$、半径 $2\sqrt{2}$ の円です。中心を原点に移すため $u = x+1,\ v = y+1$ とおくと、$x=u-1,\ y=v-1$、制約は $u^2+v^2=8$ になります。</p>
+
+            <div class="note">平方完成で「円」を作ると、対称性が分かり、ラグランジュ法の式が短くなります。</div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（2）目的関数を置き換え、ラグランジュ関数を立てます。</div>
+            <p>$f(x,y)=2xy$ を $u,v$ で書き直すと $f(u,v)=2(u-1)(v-1)=2uv-2u-2v+2$ になります。制約 $u^2+v^2=8$ を入れてラグランジュ関数を作ります。</p>
+
+            <div class="formula">
+                $$\mathcal{L}(u,v,\lambda) = 2uv - 2u - 2v + 2 - \lambda(u^2 + v^2 - 8)$$
+            </div>
+
+            <p>極値は $\mathcal{L}$ の勾配がゼロになるところです。$u,v,\lambda$ で偏微分して連立します。</p>
+
+            <div class="formula">
+                $$\frac{\partial \mathcal{L}}{\partial u} = 2v - 2 - 2\lambda u = 0,\quad \frac{\partial \mathcal{L}}{\partial v} = 2u - 2 - 2\lambda v = 0,\quad u^2 + v^2 = 8$$
+            </div>
+
+            <p>整理すると $v-1=\lambda u,\ u-1=\lambda v$ と円の方程式の3本を解く問題になります。</p>
+
+            <div class="note">ラグランジュ未定乗数法は「目的関数の勾配」と「制約の勾配」が平行になる点を探す方法です。これで制約上の候補を漏れなく拾えます。</div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（3）連立方程式を解いて候補点を求めます。</div>
+            <p>対称性からまず $u=v$ の場合を調べます。$v-1=\lambda u$ に代入すると $(1-\lambda)u=1$。さらに制約 $2u^2=8$ から $u=\pm2$ が得られます。</p>
+
+            <div class="calculation">
+                $$u=v=2 \Rightarrow (x,y)=(1,1),\quad u=v=-2 \Rightarrow (x,y)=(-3,-3)$$
+            </div>
+
+            <p>次に $u \neq v$ の場合を調べます。$\lambda=-1$ とすると $v-1=-u,\ u-1=-v$ が同時に成り立ち、$v=-u+1$ を制約に代入します。</p>
+
+            <div class="calculation">
+                $$u^2 + (-u+1)^2 = 8 \;\Rightarrow\; 2u^2 - 2u - 7 = 0 \;\Rightarrow\; u = \frac{1 \pm \sqrt{15}}{2}$$
+                $$v = -u + 1 \Rightarrow \left(u,v\right)=\left(\frac{1+\sqrt{15}}{2},\ \frac{1-\sqrt{15}}{2}\right),\ \left(\frac{1-\sqrt{15}}{2},\ \frac{1+\sqrt{15}}{2}\right)$$
+                $$\Rightarrow (x,y) = \left(\frac{-1+\sqrt{15}}{2},\ \frac{-1-\sqrt{15}}{2}\right),\ \left(\frac{-1-\sqrt{15}}{2},\ \frac{-1+\sqrt{15}}{2}\right)$$
+            </div>
+
+            <p>$\lambda=1$ は $(1-\lambda)u=1$ と矛盾するため解がありません。以上で全候補がそろいます。</p>
+
+            <div class="note">対称なケース（$u=v$）を先に解くと計算が大幅に短縮できます。残りは特定の $\lambda$ を仮定して一次方程式に落とし込むと解きやすくなります。</div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">（4）候補で $f(x,y)$ を評価し、最大・最小を決定します。</div>
+            <p>元の関数 $f(x,y)=2xy$ に代入して値を比べます。</p>
+
+            <div class="calculation">
+                $$f(1,1) = 2,\qquad f(-3,-3) = 18$$
+                $$f\!\left(\tfrac{-1+\sqrt{15}}{2}, \tfrac{-1-\sqrt{15}}{2}\right) = -7,\quad f\!\left(\tfrac{-1-\sqrt{15}}{2}, \tfrac{-1+\sqrt{15}}{2}\right) = -7$$
+            </div>
+
+            <p>最大値は $18$（点 $(-3,-3)$）、最小値は $-7$（上記2点）です。$(1,1)$ は中間値 $2$ をとり、最大・最小にはなりません。</p>
+
+            <div class="note">制約付き極値は「候補を列挙し、関数値を比較する」ことで確定します。閉じた円周上の問題なので、この比較で十分です。</div>
+        </div>
+
+        <div class="answer-box">
+            <div class="answer-title">【最終結果】</div>
+            <p>最大値 $18$ は点 $(-3,-3)$ で達成します。</p>
+            <p>最小値 $-7$ は点 $\\left(\\dfrac{-1+\\sqrt{15}}{2},\\ \\dfrac{-1-\\sqrt{15}}{2}\\right)$ と $\\left(\\dfrac{-1-\\sqrt{15}}{2},\\ \\dfrac{-1+\\sqrt{15}}{2}\\right)$ の2点で達成します。</p>
+            <p>点 $(1,1)$ では値 $2$ をとり、極大・極小にはなりません。</p>
+        </div>
+
+        <div class="verification">
+            <div class="verification-title">検証</div>
+            <p>全候補点を制約 $(x+1)^2 + (y+1)^2 = 8$ に代入し、すべて一致することを確認します。また、各点でラグランジュ条件 $v-1=\lambda u,\ u-1=\lambda v$（元の変数では $y=\lambda(x+1),\ x=\lambda(y+1)$）が成立し、勾配が平行になることを確かめます。</p>
+            <p>候補点での関数値を比較し、$18$ を超える値や $-7$ を下回る値が出ないことを確認します。以上より求めた結果の正しさを確認しました。</p>
+        </div>
+    </div>
+</body>
+</html>
