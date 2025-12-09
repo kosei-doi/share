@@ -5,90 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Index</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
             padding: 20px;
         }
 
-        .container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
-        }
-
         h1 {
-            color: #333;
-            margin-bottom: 30px;
-            text-align: center;
-            font-size: 2em;
+            margin-bottom: 20px;
         }
 
         .file-list {
             list-style: none;
+            padding: 0;
         }
 
         .file-item {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .file-link {
-            display: block;
-            padding: 16px 20px;
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
+            color: #0066cc;
             text-decoration: none;
-            color: #495057;
-            transition: all 0.3s ease;
-            font-size: 1.1em;
         }
 
         .file-link:hover {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }
-
-        .file-link:active {
-            transform: translateX(2px);
-        }
-
-        .file-icon {
-            margin-right: 10px;
-            font-size: 1.2em;
-        }
-
-        .no-files {
-            text-align: center;
-            color: #6c757d;
-            padding: 20px;
-            font-style: italic;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📁 File Index</h1>
-        <ul class="file-list" id="fileList">
-            <!-- Files will be dynamically loaded here -->
-        </ul>
-    </div>
+    <h1>File Index</h1>
+    <ul class="file-list" id="fileList">
+        <!-- Files will be dynamically loaded here -->
+    </ul>
 
     <script>
         // Get all HTML files in the current directory (excluding index.html)
@@ -110,7 +61,7 @@
                 const link = document.createElement('a');
                 link.href = file;
                 link.className = 'file-link';
-                link.innerHTML = `<span class="file-icon">📄</span>${file}`;
+                link.textContent = file;
                 
                 listItem.appendChild(link);
                 fileList.appendChild(listItem);
